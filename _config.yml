@@ -40,6 +40,8 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
+
+## 文章资源文件夹，我没有启用，因为已经在typora做了相应设置
 post_asset_folder: false
 relative_link: false
 future: true
@@ -97,6 +99,28 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+
+# 字数统计
+symbols_count_time:
+  # 每篇文章前显示
+  symbols: true
+  time: true
+  # 网站底部显示
+  total_symbols: false
+  total_time: false
+  exclude_codeblock: false
+  awl: 2  # 平均字节长度（Average Word Length）。默认为4 如果文章中大多中文，那么设置awl为2，wpm为300比较合适
+  wpm: 275  # wpm – 每分钟阅读字数（Words Per Minute）。默认为275
+  suffix: "mins."
+
+# 文章搜索
+search:
+  path: search.xml    #要检索的文件
+  field: post #检索范围
+  format: html
+  content: false  #是否检索内容
+  limit: 10
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
