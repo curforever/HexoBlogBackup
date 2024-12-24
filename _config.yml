@@ -118,8 +118,8 @@ search:
   path: search.xml    #要检索的文件
   field: post #检索范围
   format: html
-  content: false  #是否检索内容
-  limit: 10
+  content: true  #是否检索内容
+  limit: 100
 
 
 # Deployment
