@@ -22,10 +22,10 @@ category: 讲解教程
 给定一长度为n的字符串T=T_1 T_2 〖…T〗_n和整数i (1<=i<=n)，子串T_i T_(i+1) 〖…T〗_n便都是字符串T的后缀。以字符串T=abcabxabcd为例，它的长度为10，所以abcabxabcd、bcabxabcd、cabxabcd、…、d都是T的后缀。规定空字串也是后缀。后缀树，就是包含一则字符串所有后缀的压缩字典树，压缩过程如图1所示。把abcabxabcd的所有后缀加入字典树并压缩后，我们得到如图2的后缀树。
 
 
-![图1 后缀字典树到后缀树的压缩过程](Esko Ukkonen On-line Construction of Suffix Trees.assets/6acacda119cab9dd2e567502e3677939.png)
+![图1 后缀字典树到后缀树的压缩过程](Esko Ukkonen On-line Construction of Suffix Trees/6acacda119cab9dd2e567502e3677939.png)
 
 
-![图2 abcabxabcd的后缀树](Esko Ukkonen On-line Construction of Suffix Trees.assets/441b6b774ab91a0a40e2b0edd0232d4e.png)
+![图2 abcabxabcd的后缀树](Esko Ukkonen On-line Construction of Suffix Trees/441b6b774ab91a0a40e2b0edd0232d4e.png)
 
 如图2所示，Suffix Tree与Trie的不同在于边不再只代表单个字符，而是每个边可以表示任意的长度，实操过程中用两个指针[from， to]实现，耗费O(1)的空间。
 
@@ -55,21 +55,21 @@ McCreight最初的构造法原则上要按逆序构造，也就是说字符要�
 **问题：我们提到了隐式后缀树，隐式什么时候变为显式？怎么变为显式？**
 比喻：隐式就像瘦子躲在胖子后面，瘦子露出马脚的时候就是变为显式的时候。
 举例：以最终构建abcabx为例。第一阶段，我们从左到右在线构建abc的后缀树，如图3所示。
- ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/dd57f4da725c038161235b3f84657b20.png)
+ ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/dd57f4da725c038161235b3f84657b20.png)
 图3 abc的后缀树
 第二阶段，我们需要构建abcab的后缀树，如图4所示。新增字符a新增字符b的情况下，不必大刀阔斧改变树的结构，只要悄悄在每条边后面追加a追加b即可。枚举abcab的后缀集合：abcab、bcab、cab、ab、b。观察发现，abcab、bcab、cab即为三条边，而ab、b隐式地包含其中。
 
- ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/7bf70b3bdbcbf172481964a86f221193.png)
+ ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/7bf70b3bdbcbf172481964a86f221193.png)
 
 图4 abcab的后缀树
 第三阶段，我们需要构建abcabx的后缀树。新增字符x，x就是露出的马脚，因为已有的后缀树的边里没有包含abx的。露出马脚之时就是变为显式之日，通过裂变出新的边变为显式，如图5所示。
- ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/2a784f64875c60a2bb00befdfcab4329.png)
+ ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/2a784f64875c60a2bb00befdfcab4329.png)
 图5 abcabx的后缀树
 
 **问题：如何确定裂变的位置？**
 解决：引入活动点active point，用于确定裂变的位置。活动点active point是一个包括(active_node, active_edge, active_length)的三元组。该三元组在每次后缀树的搜索中更新。
 根据active_node确定结点，根据active_edge确定结点的某一条边，根据active_length确定边上的某个位置。举例来说，如图6所示，active_node为0，即根节点，active_edge为a，即从根节点出发、字符为a的这条边，active_length为2，即该边索引为2的地方，即符号|所在位置。
- ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/0cd8b06ef3a341b25445a60cac7e6b1c.png)
+ ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/0cd8b06ef3a341b25445a60cac7e6b1c.png)
 图6 active point的含义解释
 
 **问题：裂变具体怎么做？**
@@ -77,12 +77,12 @@ McCreight最初的构造法原则上要按逆序构造，也就是说字符要�
 ① 根据活动点确定裂变位置（ab|cab），在|处添加节点。
 ② 在新增的节点后分裂出一个边为x的节点。
 
-![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/33d19f111e79fc01e511eed4fd34410c.png)
+![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/33d19f111e79fc01e511eed4fd34410c.png)
 图7 裂变的过程
 至此由于添加abx后缀引发的裂变完成。
 **问题：只裂变一次就够了吗？**
 思考：未必够。以abcab到abcabx为例，abcab的后缀树表示如图8所示。
- ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/916ab767229cd8688ecede1d6214c4df.png)
+ ![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/916ab767229cd8688ecede1d6214c4df.png)
 图8 abcab的后缀树
 已知abcabx的后缀集合：abcabx、bcabx、cabx、abx、bx、x。
 如果仅在已有的边后面添加x，只能覆盖abcabx、bcabx、cabx，剩下abx、bx、x。由于每次裂变能得到1个新后缀，直觉上来说需要进行3次裂变，事实上也是如此。上述过程只完成了添加abx后缀引发的裂变。
@@ -100,32 +100,32 @@ McCreight最初的构造法原则上要按逆序构造，也就是说字符要�
 观察：后缀链接连接的节点存在的关系：如果有一个从A指向B的后缀链接，那么从根节点到A节点表示的子串剔除第首个字符后得到的即为从根节点到B节点表示的子串。
 举例：图9中节点4表示字符串ab，节点6表示字符串b，ab剔除掉首个字符a后得到b。实际处理时，每一次裂变意味着一个待添加后缀的成功插入（abx），下一次裂变的工作就是插入下一个待添加后缀（bx），下一个待添加后缀（bx）与当前成功插入的后缀（abx）的关系也是这样。
 好处：可以方便地从一个后缀跳到另一个后缀，降低算法的时间复杂度。
-![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees.assets/adeeca639e49e547a5b54e7b817e1c59.png)
+![在这里插入图片描述](Esko Ukkonen On-line Construction of Suffix Trees/adeeca639e49e547a5b54e7b817e1c59.png)
 
 
 ## 3.2 过程演示
 
-![图10 后缀树构建过程演示Step 1-空树](Esko Ukkonen On-line Construction of Suffix Trees.assets/76d05959648ed4212fe1c0ccaa09e7cd.png)
+![图10 后缀树构建过程演示Step 1-空树](Esko Ukkonen On-line Construction of Suffix Trees/76d05959648ed4212fe1c0ccaa09e7cd.png)
 
-![图11 后缀树构建过程演示Step 2-a](Esko Ukkonen On-line Construction of Suffix Trees.assets/e91af3d53f2bb9ee38567cf6045e1cc6.png)
-
-
-
-![图12 后缀树构建过程演示Step 3-ab](Esko Ukkonen On-line Construction of Suffix Trees.assets/d3851a90bc2f300a0fc14dffa770f4e5.png)
+![图11 后缀树构建过程演示Step 2-a](Esko Ukkonen On-line Construction of Suffix Trees/e91af3d53f2bb9ee38567cf6045e1cc6.png)
 
 
 
-![图13 后缀树构建过程演示Step 4-abc](Esko Ukkonen On-line Construction of Suffix Trees.assets/53309f726a393bced86746c7a838c6f1.png)
+![图12 后缀树构建过程演示Step 3-ab](Esko Ukkonen On-line Construction of Suffix Trees/d3851a90bc2f300a0fc14dffa770f4e5.png)
 
 
 
-![图14 后缀树构建过程演示Step 5-abca](Esko Ukkonen On-line Construction of Suffix Trees.assets/d45b48924e9a6f7252b6f2b0ce4aad13.png)
+![图13 后缀树构建过程演示Step 4-abc](Esko Ukkonen On-line Construction of Suffix Trees/53309f726a393bced86746c7a838c6f1.png)
+
+
+
+![图14 后缀树构建过程演示Step 5-abca](Esko Ukkonen On-line Construction of Suffix Trees/d45b48924e9a6f7252b6f2b0ce4aad13.png)
 
 
 注意到已经存在的第一条边前缀中隐式包含了a。隐式包含在实操过程中的做法就是更新活动点active point和剩余后缀数remainder。
 单就后缀树而言，这颗后缀树没有准确地描述当前读到的字符串abca。如何保证最后扫描结束的时候后缀树可以准确表示呢？回扣前文终结符的引入：在遇到$并做完相应操作后，后缀树可以准确地描述abca$。
 
-![图15 后缀树构建过程演示Step 6-abcab](Esko Ukkonen On-line Construction of Suffix Trees.assets/3e305edbd22d407d460daf5833cba095.png)
+![图15 后缀树构建过程演示Step 6-abcab](Esko Ukkonen On-line Construction of Suffix Trees/3e305edbd22d407d460daf5833cba095.png)
 
 更新active point：a后面有b，length+1，往后挪；还在同一条边上，node和edge不变；
 更新remainder+1=2：表示需要插入两个后缀ab、b。
@@ -135,7 +135,7 @@ McCreight最初的构造法原则上要按逆序构造，也就是说字符要�
 先说结论：“既然第一条边有ab|cab，那在第一条边后面（也就是第二条第三条边里）一定存在去掉a以b开头的后缀”。
 再详细解释：回顾一下这里第二条边是如何产生的？正是因为后缀树的逐步构建过程中a后接了b，所以我们先在第一条边的a追加成ab，再为b开辟新的边，即第二条边，所以这个第二条边就是显然的以b开头的后缀。换句话说，即使a后面不是紧跟的b，而是紧跟的是个x，那也会新开一条边以x开头的。
 
-![图16 后缀树构建过程演示Step 7-abcabx-插入abx](Esko Ukkonen On-line Construction of Suffix Trees.assets/a22f32c30e4b711815f8af1b5f9e5f9f.png)
+![图16 后缀树构建过程演示Step 7-abcabx-插入abx](Esko Ukkonen On-line Construction of Suffix Trees/a22f32c30e4b711815f8af1b5f9e5f9f.png)
 
 remainder=3，表示有3个待添加的后缀：abx、bx、x
 我们按之前的逻辑来试图更新active point：ab之后找x，找不到！因此在裂变位置添加新的节点4、新的边x。这一步完成了后缀abx的添加。但是active point怎么更新呢？ 
@@ -147,7 +147,7 @@ remainder=3，表示有3个待添加的后缀：abx、bx、x
 	active_length 减1；
 
 
-![图17 后缀树构建过程演示Step 7-abcabx-插入abx后更新active point](Esko Ukkonen On-line Construction of Suffix Trees.assets/a64832fcdb1136281c02cdf2fbdf0854.png)
+![图17 后缀树构建过程演示Step 7-abcabx-插入abx后更新active point](Esko Ukkonen On-line Construction of Suffix Trees/a64832fcdb1136281c02cdf2fbdf0854.png)
 
 根据Rule 1规则更新active point：
 	active_node 保持为 root；
@@ -156,7 +156,7 @@ remainder=3，表示有3个待添加的后缀：abx、bx、x
 更新remainder：remainder-1=2，表示还有2个后缀待添加：bx、x。
 
 
-![图18 后缀树构建过程演示Step 8-abcabx-插入bx](Esko Ukkonen On-line Construction of Suffix Trees.assets/63436a9acf538d6d203988fdae7ab973.png)
+![图18 后缀树构建过程演示Step 8-abcabx-插入bx](Esko Ukkonen On-line Construction of Suffix Trees/63436a9acf538d6d203988fdae7ab973.png)
 
 裂变过程与abx的插入相似，不多赘述。依据Rule 1更新active point为 (0, 'x', 0)。
 更新remainder-1=1，表示还有1个后缀x没有插入。
@@ -168,23 +168,23 @@ remainder=3，表示有3个待添加的后缀：abx、bx、x
 在图18中，因插入bx新裂变出来的节点6，不是扫描到x后创建的第一个节点了（第一个节点是因插入abx新裂变出来的节点4），因此创建后缀链接：4->6。
 我的理解是“前人栽树，后人乘凉”，这条后缀链接在下一次碰到ab时会有用。
 
-![图19 后缀树构建过程演示Step 9-abcabx-插入x](Esko Ukkonen On-line Construction of Suffix Trees.assets/241229f58f6858bce3fdc663271d3a02.png)
+![图19 后缀树构建过程演示Step 9-abcabx-插入x](Esko Ukkonen On-line Construction of Suffix Trees/241229f58f6858bce3fdc663271d3a02.png)
 
 active point为 (0, x, 0)，length=0，所以在根节点创建边x。
 remainder-1=0，表示可以处理下一个字符了。
 
 
-![图20 Step 10 后缀树构建过程演示-abcabxa](Esko Ukkonen On-line Construction of Suffix Trees.assets/8d808c8cb610ac0bae0578d2a0f076e4.png)
+![图20 Step 10 后缀树构建过程演示-abcabxa](Esko Ukkonen On-line Construction of Suffix Trees/8d808c8cb610ac0bae0578d2a0f076e4.png)
 
 
 
-![图21 后缀树构建过程演示Step 11-abcabxab](Esko Ukkonen On-line Construction of Suffix Trees.assets/1c1968d58f4f4c5bc7683d5b16938455.png)
-![图22 后缀树构建过程演示Step 12-abcabxabc](Esko Ukkonen On-line Construction of Suffix Trees.assets/c0ae42f9a7da011ee79ddb8dc51b280e.png)
+![图21 后缀树构建过程演示Step 11-abcabxab](Esko Ukkonen On-line Construction of Suffix Trees/1c1968d58f4f4c5bc7683d5b16938455.png)
+![图22 后缀树构建过程演示Step 12-abcabxabc](Esko Ukkonen On-line Construction of Suffix Trees/c0ae42f9a7da011ee79ddb8dc51b280e.png)
 
 更新active point(4,’c’,1)；
 更新remainder=3，表示需要插入abc、bc、c三个后缀。
 
-![图23 后缀树构建过程演示Step 13-abcabxabcd](Esko Ukkonen On-line Construction of Suffix Trees.assets/2bc2d57804e9482ce96f46ece0d7cf3e.png)
+![图23 后缀树构建过程演示Step 13-abcabxabcd](Esko Ukkonen On-line Construction of Suffix Trees/2bc2d57804e9482ce96f46ece0d7cf3e.png)
 
 更新remainder = 4，需要插入abcd、bcd、cd、d四个后缀；
 更新active point：abc之后找d，找不到！因此在裂变位置添加新的节点9、新的边d。
@@ -200,7 +200,7 @@ remainder-1=0，表示可以处理下一个字符了。
 更新remainder = 3，并且开始处理下一个剩余后缀bcd。
 bc后并没有没出现d，裂变。
 
-![图24 后缀树构建过程演示Step 14-abcabxabcd-插入bcd](Esko Ukkonen On-line Construction of Suffix Trees.assets/65e0df16b2dc3965f7e7c0189a225f24.png)
+![图24 后缀树构建过程演示Step 14-abcabxabcd-插入bcd](Esko Ukkonen On-line Construction of Suffix Trees/65e0df16b2dc3965f7e7c0189a225f24.png)
 
 裂变创建了节点11和边d。除了更新之外，根据Rule2创建后缀链接：9->11。
 此时，我们观察两个后缀链接：
@@ -210,20 +210,20 @@ remainder-1=2，表示还需要插入cd、d；
 根据Rule 3更新active point为(root, c, 1)。
 
 
-![图25 后缀树构建过程演示Step 15-abcabxabcd-插入cd](Esko Ukkonen On-line Construction of Suffix Trees.assets/386d3504718fddf9b0ce651c7dc86a79.png)
+![图25 后缀树构建过程演示Step 15-abcabxabcd-插入cd](Esko Ukkonen On-line Construction of Suffix Trees/386d3504718fddf9b0ce651c7dc86a79.png)
 
 更新active point时：由于找不到后续d，因此裂变：新建节点13和边d；
 更新remainder-1 = 1；
 依据Rule 2创建后缀链接：11 -> 13。
 
 
-![图26 后缀树构建过程演示Step 16-abcabxabcd-插入d](Esko Ukkonen On-line Construction of Suffix Trees.assets/fddc1ff5489a9a7cae0c61c89f034748.png)
+![图26 后缀树构建过程演示Step 16-abcabxabcd-插入d](Esko Ukkonen On-line Construction of Suffix Trees/fddc1ff5489a9a7cae0c61c89f034748.png)
 
 更新active point时：由于找不到后续d，因此裂变，新建边d；
 更新remainder-1=0。
 
 
-![图27 后缀树构建过程演示Step 17-abcabxabcd$](Esko Ukkonen On-line Construction of Suffix Trees.assets/d892500e7a996e91ed73317b7618ce7b.png)
+![图27 后缀树构建过程演示Step 17-abcabxabcd$](Esko Ukkonen On-line Construction of Suffix Trees/d892500e7a996e91ed73317b7618ce7b.png)
 
 对树结构的改变仅需在根节点上插入一条新边$。
 整个后缀树构建完成。

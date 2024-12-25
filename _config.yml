@@ -42,7 +42,7 @@ filename_case: 0
 render_drafts: false
 
 ## 文章资源文件夹，我没有启用，因为已经在typora做了相应设置
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
