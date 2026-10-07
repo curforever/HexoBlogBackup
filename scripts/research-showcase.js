@@ -25,10 +25,10 @@ hexo.extend.generator.register('research-showcase',function(locals){
   if(figures!==15)throw Error('Expected 15 figures in '+name+', found '+figures);
   const data=english?{
    LANG:'en',TITLE:'VR Research · curforever',DESCRIPTION:'Task-aware rendering, shared cache reuse and a client–edge system: original figures, results and evaluation scope.',
-   CANONICAL:'https://curforever.github.io/research/en/',SKIP:'Skip to content',NAV_LABEL:'Main navigation',ARCHIVES:'Archives',TOPICS:'Topics',RESEARCH:'Research',RESEARCH_URL:'/research/en/',ABOUT:'About',ORIGINALS:'Original figures on GitHub',DISCUSS:'Discuss'
+   CANONICAL:'https://curforever.github.io/research/en/',SKIP:'Skip to content',NAV_LABEL:'Main navigation',SEARCH:'Search notes',ARCHIVES:'Archives',TOPICS:'Topics',RESEARCH:'Research',RESEARCH_URL:'/research/en/',ABOUT:'About',ORIGINALS:'Original figures on GitHub',DISCUSS:'Discuss'
   }:{
    LANG:'zh-CN',TITLE:'VR 研究图解 · curforever',DESCRIPTION:'从眼动任务识别、渲染参数控制到多人共享缓存与端边系统：用原图看懂问题、方法、结果与边界。',
-   CANONICAL:'https://curforever.github.io/research/',SKIP:'跳到正文',NAV_LABEL:'主导航',ARCHIVES:'全部归档',TOPICS:'主题分类',RESEARCH:'研究图解',RESEARCH_URL:'/research/',ABOUT:'关于',ORIGINALS:'GitHub 原图与材料',DISCUSS:'交流与反馈'
+   CANONICAL:'https://curforever.github.io/research/',SKIP:'跳到正文',NAV_LABEL:'主导航',SEARCH:'搜索笔记',ARCHIVES:'全部归档',TOPICS:'主题分类',RESEARCH:'研究图解',RESEARCH_URL:'/research/',ABOUT:'关于',ORIGINALS:'GitHub 原图与材料',DISCUSS:'交流与反馈'
   };
   const html=template.replace(/\{\{([A-Z_]+)\}\}/g,function(_,key){if(key==='BODY')return body;if(!(key in data))throw Error('Missing template value: '+key);return escape(data[key]);});
   pages.push({path:english?'research/en/index.html':'research/index.html',data:html});

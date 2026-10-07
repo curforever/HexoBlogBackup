@@ -43,3 +43,7 @@ npm run build
 生成接口与错误页位置参考 [Hexo Generator](https://hexo.io/api/generator)、[GitHub Pages 404](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)。
 
 历史文章的 date / updated 使用上海本地时间（`YYYY-MM-DD HH:mm:ss`），避免 Hexo front-matter 对带时区时间的再次转换；修改正文时保留原 date。
+
+首页的折叠搜索使用既有 `/search.xml`，首次查询才下载索引；支持标题、正文、分类和标签、多关键词、键盘及失败重试。搜索结果仅链接本站，显示文本不作为 HTML 注入。研究页的搜索入口返回首页搜索区。
+
+搜索索引生成后会校正多余的起始斜杠，仅处理本站实际存在的页面；避免自定义文章路径被当成外部主机地址。
