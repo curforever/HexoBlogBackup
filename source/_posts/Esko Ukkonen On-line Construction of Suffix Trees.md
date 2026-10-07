@@ -1,6 +1,7 @@
 ---
 title: Esko Ukkonen On-line Construction of Suffix Trees
 category: 讲解教程
+date: 2024-12-20T08:29:38.234Z
 ---
 
 
