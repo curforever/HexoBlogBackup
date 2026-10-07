@@ -59,3 +59,6 @@
 {%- endif %}
 
 {{ next_config() }}
+
+<link rel="icon" type="image/svg+xml" href="{{ url_for('/images/curforever.svg') }}">
+<link rel="stylesheet" href="{{ url_for('/styles/content.css') }}">

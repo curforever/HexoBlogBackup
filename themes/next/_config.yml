@@ -40,10 +40,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/leaf16.ico
-  medium: /images/leaf32.ico
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small:
+  medium:
+  apple_touch_icon:
+  safari_pinned_tab:
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -104,7 +104,7 @@ creative_commons:
 scheme: Gemini
 
 # Dark Mode
-darkmode: false
+darkmode: true
 
 
 # ---------------------------------------------------------------
@@ -118,6 +118,8 @@ darkmode: false
 # External url should start with http:// or https://
 menu:
   home: / || home
+  研究图解: /research/ || eye
+  GitHub: https://github.com/curforever || github
   about: /about/ || user
   # tags: /tags/ || tags
   categories: /categories/ || th
@@ -975,8 +977,8 @@ vendors:
   # pace: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
   # pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
   # pace_css: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css
-  pace: cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
-  pace_css: cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
+  pace: https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
+  pace_css: https://cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
 
   # Internal version: 1.0.0
   # three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js

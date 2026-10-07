@@ -1,6 +1,7 @@
 ---
 title: 关于 curforever
 date: 2024-12-20 14:54:01
+updated: 2026-10-07
 type: about
 comments: false
 ---
@@ -13,7 +14,7 @@ comments: false
 
 - **技术实践**：基础概念、环境配置、问题排查和学习记录。
 - **阅读与播客**：2024–2025 年积累的摘录与笔记，保留原材料的阅读语境。
-- **工程与研究**：更多项目、毕业研究和开源贡献请看 [GitHub 主页](https://github.com/curforever)。
+- **工程与研究**：[毕业研究图解](/research/)使用原论文图表说明任务感知、共享缓存与系统集成；其他项目与开源贡献请看 [GitHub 主页](https://github.com/curforever)。
 
 ## 技术之外
 
